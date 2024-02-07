@@ -1,6 +1,9 @@
-const express = require('express');
-const { sequelize } = require('./config/database');
 require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const { sequelize } = require('./config/database');
+
+
 const indexRoutes = require('./routes/indexRoutes');
 
 const app = express();
@@ -8,6 +11,8 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 app.use(indexRoutes);
 

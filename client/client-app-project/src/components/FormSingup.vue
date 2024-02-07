@@ -1,19 +1,30 @@
 <script setup>
+import { reactive } from 'vue';
+
+const formData = reactive(
+    {
+        nom: '',
+        prenom: '',
+        email: '',
+        password: ''
+    }
+);
+
 
 </script>
 
 <template>
     <form action="">
         <label for="nom">Nom</label>
-        <input type="text" name="nom" id="nom" placeholder="Paul">
+        <input type="text" v-model.trim="formData.nom" name="nom" id="nom" placeholder="Paul">
         <label for="prenom">Prénom</label>
-        <input type="text" name="prenom" id="prenom" placeholder="Pierre">
+        <input type="text" v-model.trim="formData.prenom" name="prenom" id="prenom" placeholder="Pierre">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="pierre.paul@jacques.com">
+        <input type="email" v-model.trim="formData.email" name="email" id="email" placeholder="pierre.paul@jacques.com">
         <label for="email-confirm">Confirmation email</label>
         <input type="email" name="email-confirm" id="email-confirm" placeholder="pierre.paul@jacques.com">
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password">
+        <input type="password" v-model.trim="formData.password" name="password" id="password">
         <label for="password-confirm">Confirmation mot de passe</label>
         <input type="password" name="password-confirm" id="password-confirm">
     </form>
@@ -44,10 +55,9 @@ form {
         border-radius: 4px;
         font-size: 16px;
     }
+
     input::placeholder {
         font-size: 0.8rem;
     }
 }
 </style>
-
-

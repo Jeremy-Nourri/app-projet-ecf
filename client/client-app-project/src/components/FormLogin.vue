@@ -1,13 +1,24 @@
 <script setup>
+import { reactive } from 'vue';
+import { useAuthStore } from '@/stores/auth';
+const { login } = useAuthStore();
+
+
+const formData = reactive({ email: '', password: '' });
+
+const submitLogin = async () => {
+  await login(formData);
+};
 
 </script>
 
 <template>
-    <form action="">
+    <form @submit.prevent="submitLogin">
         <label for="email">Email</label>
-        <input type="email" name="email" id="email" placeholder="pierre.paul@jacques.com">
+        <input type="email" v-model="formData.email" name="email" id="email" placeholder="pierre.paul@jacques.com">
         <label for="password">Mot de passe</label>
-        <input type="password" name="password" id="password">
+        <input type="password" v-model="formData.password" name="password" id="password">
+        <button @click="submitLogin">Se connecter</button>
     </form>
 </template>
 
