@@ -29,8 +29,5 @@ module.exports = (sequelize) => {
     },
   });
 
-  Tache.belongsTo(require("./projet"), { foreignKey: "projet_id" });
-  Tache.belongsTo(require("./utilisateur"), { foreignKey: "utilisateur_id" });
-
   return Tache;
 };

@@ -18,4 +18,4 @@ sequelize
 );
 
 
-module.exports = { sequelize }
+module.exports = { sequelize, Utilisateur, Tache, Projet }

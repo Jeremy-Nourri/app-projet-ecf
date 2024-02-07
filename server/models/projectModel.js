@@ -16,8 +16,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
     },
   });
-  
-  Projet.belongsTo(require('./utilisateur'), { foreignKey: 'utilisateur_id' });
+
 
   return Projet;
 };
