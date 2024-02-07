@@ -1,11 +1,11 @@
 <script setup>
-// import FormSingUp from '@/components/FormSingup.vue';
-import FormLogin from '@/components/FormLogin.vue';
+import FormSignup from '@/components/FormSignup.vue';
+// import FormLogin from '@/components/FormLogin.vue';
 </script>
 
 <template>
   <main>
-    <FormLogin/>
+    <FormSignup/>
 
   </main>
 </template>
