@@ -1,6 +1,4 @@
-// tache.js
 const { DataTypes } = require("sequelize");
-const sequelize = require("../config/database");
 
 module.exports = (sequelize) => {
   const Tache = sequelize.define("Tache", {

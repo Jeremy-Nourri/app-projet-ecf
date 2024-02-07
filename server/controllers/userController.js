@@ -34,7 +34,19 @@ const userController = {
         catch (error) {
             res.status(400).json({ message: "Erreur lors de l'authentification de l'utilisateur", error: error.message });
         }
+    },
+    getUser: async function (req, res) {
+        try {
+            const user = await Utilisateur.findOne(req.userId);
+            if (!user) {
+                return res.status(404).json({ message: 'Utilisateur non trouvé' });
+            }
+            res.json(user);
+        } catch (error) {
+            res.status(500).json({ message: "Erreur lors de la récupération du profil", error: error.message })
+        }
     }
 }
+
 
 module.exports = userController;
