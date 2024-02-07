@@ -1,4 +1,4 @@
-const { Projet } = require('../config/database');
+const { Projet } = require('../config/database')
 
 const projectController = {
     createProject: async function (req, res) {

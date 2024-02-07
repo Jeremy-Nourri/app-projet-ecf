@@ -7,9 +7,10 @@ function verifyToken(req, res, next) {
     if(!token) {
         return res.status(401).json({ message: "Aucun token" });
     }
-    
+
     try {
         const decoded = jwt.verify(token, process.env.RANDOM_TOKEN_SECRET);
+        console.log(decoded);
         req.auth = {
             userId: decoded.userId,
         };

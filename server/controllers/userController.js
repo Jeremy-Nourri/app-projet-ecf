@@ -37,7 +37,7 @@ const userController = {
     },
     getUser: async function (req, res) {
         try {
-            const user = await Utilisateur.findOne(req.userId);
+            const user = await Utilisateur.findByPk(req.params.id);
             if (!user) {
                 return res.status(404).json({ message: 'Utilisateur non trouvé' });
             }
