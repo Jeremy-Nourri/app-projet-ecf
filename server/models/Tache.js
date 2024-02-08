@@ -27,26 +27,9 @@ module.exports = (sequelize) => {
       date_echeance: {
         type: DataTypes.DATE,
       },
-      utilisateur_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Utilisateur",
-          key: "id",
-        },
-      },
-      projet_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Projet",
-          key: "id",
-        },
-      },
     },
     {
       freezeTableName: true,
-      timestamps: false,
     }
   );
 

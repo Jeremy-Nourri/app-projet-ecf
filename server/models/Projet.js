@@ -16,18 +16,9 @@ module.exports = (sequelize) => {
       details: {
         type: DataTypes.TEXT,
       },
-      utilisateur_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Utilisateur",
-          key: "id",
-        },
-      },
     },
     {
       freezeTableName: true,
-      timestamps: false,
     }
   );
 
