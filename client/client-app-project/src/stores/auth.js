@@ -17,7 +17,7 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = response.data.user;
         status.value = 'success';
       } else {
-        throw new Error('Login failed');
+        throw new Error("Erreur lros de l'authentification");
       }
     } catch (error) {
       status.value = 'error';
