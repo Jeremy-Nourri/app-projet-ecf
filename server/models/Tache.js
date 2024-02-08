@@ -29,7 +29,7 @@ module.exports = (sequelize) => {
       },
       utilisateur_id: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: "Utilisateur",
           key: "id",
@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
       },
       projet_id: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         references: {
           model: "Projet",
           key: "id",
