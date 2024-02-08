@@ -10,6 +10,16 @@ const Utilisateur = require("../models/Utilisateur")(sequelize);
 const Tache = require("../models/Tache")(sequelize);
 const Projet = require("../models/Projet")(sequelize);
 
+Utilisateur.hasMany(Projet, { foreignKey: 'utilisateur_id' });
+Projet.belongsTo(Utilisateur, { foreignKey: 'utilisateur_id' });
+
+Utilisateur.hasMany(Tache, { foreignKey: 'utilisateur_id' });
+Tache.belongsTo(Utilisateur, { foreignKey: 'utilisateur_id' });
+
+Projet.hasMany(Tache, { foreignKey: 'projet_id' });
+Tache.belongsTo(Projet, { foreignKey: 'projet_id' });
+
+
 sequelize
   .sync({ force: false})
   .then(() => console.log("La base de données à bien été synchronisée"))

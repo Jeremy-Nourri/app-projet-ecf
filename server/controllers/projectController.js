@@ -1,6 +1,7 @@
 const { Projet } = require('../config/database')
 
 const projectController = {
+    
     createProject: async function (req, res) {
         try {
             const { denomination, details, userId } = req.body;
@@ -14,6 +15,7 @@ const projectController = {
             res.status(400).json({ message: "Erreur lors de la création d'un nouveau projet", error: error.message });
         }
     },
+
     getProjectsByUser: async function (req, res) {
         try {
             const { id } = req.params;
@@ -38,21 +40,19 @@ const projectController = {
           if (!project) {
             return res.status(404).json({ message: "Projet non trouvé" });
           }
-    
-          if (denomination) {
-            project.denomination = denomination;
-          }
-          if (details) {
-            project.details = details;
-          }
-    
-          await project.save();
+
+          
+          const newProject = await task.update(req.body)
+
+          res.json({ message: "Tâche mise à jour avec succès", newProject });
+
     
           res.json({ message: "Projet mise à jour avec succès", project });
         } catch (error) {
           res.status(400).json({ message: "Erreur lors de la mise à jour du projet", error: error.message });
         }
     },
+
     deleteProject: async function (req, res) {
         try {
             const { id, projectId } = req.params;
