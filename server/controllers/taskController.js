@@ -34,13 +34,13 @@ const taskController = {
             message: "Tâche créée avec succès" 
         });
 
-    } catch (error) {
-        res.status(400).json({
-            message: "Erreur lors de la création d'une nouvelle tâche",
-            error: error.message,
-        });
-    }
-  },
+        } catch (error) {
+            res.status(400).json({
+                message: "Erreur lors de la création d'une nouvelle tâche",
+                error: error.message,
+            });
+        }
+    },
 
     updateTask: async function (req, res) {
         try {
@@ -70,6 +70,24 @@ const taskController = {
                 message: "Erreur lors de la mise à jour de la tâche",
                 error: error.message,
             });
+        }
+    },
+
+    deleteTask: async function (req, res) {
+        try {
+            const { projectId, taskId } = req.params;
+
+            await Tache.destroy(
+                {
+                    where: { 
+                        projet_id: projectId,
+                        id: taskId
+                    }
+                });
+            res.status(201).json({ message: "Tâche supprimée avec succès"});
+        }
+        catch (error) {
+            res.status(400).json({ message: "Erreur lors de la suppression de la tâche", error: error.message });
         }
     },
 };

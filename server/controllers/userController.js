@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const userController = {
+
     signUp: async function (req, res) {
         try {
             const { nom, prenom, email, password } = req.body;
@@ -17,6 +18,7 @@ const userController = {
             res.status(400).json({ message: "Erreur lors de la création d'un nouvel utilisateur", error: error.message });
         }
     },
+
     login: async function (req, res) {
         try {
             const { email, password } = req.body;
@@ -35,6 +37,7 @@ const userController = {
             res.status(400).json({ message: "Erreur lors de l'authentification de l'utilisateur", error: error.message });
         }
     },
+    
     getUser: async function (req, res) {
         try {
             const user = await Utilisateur.findByPk(req.params.id);
