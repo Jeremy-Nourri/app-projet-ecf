@@ -1,11 +1,12 @@
 @import './reset.css';
+
 #app {
   width: 100%;
 }
 
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #e70e0e;
+  background-color: #fff9f9;
   margin: 0;
   padding: 0;
   display: flex;

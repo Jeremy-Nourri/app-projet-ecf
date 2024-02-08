@@ -5,7 +5,7 @@ import { RouterView } from 'vue-router'
 
 <template>
   <header>
-    <h1>Bienvenue !</h1>
+    <h1>Application de gestion de projet</h1>
   </header>
 
   <RouterView />
@@ -13,7 +13,13 @@ import { RouterView } from 'vue-router'
 
 <style scoped>
 header {
-  background-color: darkblue;
-  color: azure;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  background-color: rgb(30, 30, 136);
+  color: white;
 }
 </style>
