@@ -2,6 +2,8 @@ const { Utilisateur } = require('../config/database');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const expiryDate = new Date(Date.now() + 60 * 60 * 7000)
+
 const userController = {
 
     signUp: async function (req, res) {
@@ -30,6 +32,13 @@ const userController = {
             }
 
             const token = jwt.sign({ userdId: user.id }, process.env.RANDOM_TOKEN_SECRET, { expiresIn: "1d" });
+
+            res.cookie("accessToken", token, {
+                httpOnly: true,                
+                secure: true,
+                sameSite: "none",
+                expires: expiryDate
+            });
         
             res.header('Authorization', `Bearer ${token}`).json({ message: `${user.prenom} vous étes connecté` });
         } 
@@ -37,7 +46,7 @@ const userController = {
             res.status(400).json({ message: "Erreur lors de l'authentification de l'utilisateur", error: error.message });
         }
     },
-    
+
     getUser: async function (req, res) {
         try {
             const user = await Utilisateur.findByPk(req.params.id);

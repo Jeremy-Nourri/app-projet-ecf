@@ -6,14 +6,14 @@ export const useAuthStore = defineStore('auth', () => {
   
   const user = ref(null);
 
-
-  const isLoggedIn = computed(() => !!user.value);
+  const isLoggedIn = ref(false);
 
   async function login({ email, password }) {
 
     try {
       const response = await axios.post('http://localhost:3000/login', { email, password });
       if (response.status === 200) {
+        isLoggedIn.value = true;
         user.value = response.data.user;
       } else {
         throw new Error("Erreur lors de l'authentification");

@@ -1,14 +1,21 @@
 <script setup>
 import { reactive } from 'vue';
 import { useAuthStore } from '@/stores/auth';
-import { RouterLink } from 'vue-router';
-const { login } = useAuthStore();
+import { RouterLink,  } from 'vue-router';
+import router from '@/router';
 
+
+const { login, isLoggedIn } = useAuthStore();
+
+console.log(isLoggedIn);
 
 const formData = reactive({ email: '', password: '' });
 
 const submitLogin = async () => {
     await login(formData);
+    if (isLoggedIn === true) {
+        router.push({ name: "account"})
+    }
 };
 
 </script>
