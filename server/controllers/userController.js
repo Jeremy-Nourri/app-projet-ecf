@@ -24,7 +24,9 @@ const userController = {
     login: async function (req, res) {
         try {
             const { email, password } = req.body;
-            const user = await Utilisateur.findOne({ where: { email } });
+            const user = await Utilisateur.findOne({ 
+                where: { email },
+            });
             const validPassword = await bcrypt.compare(password, user.password);
 
             if (!user || !validPassword) {
@@ -40,7 +42,9 @@ const userController = {
                 expires: expiryDate
             });
         
-            res.header('Authorization', `Bearer ${token}`).json({ message: `${user.prenom} vous étes connecté` });
+            res
+                .header('Authorization', `Bearer ${token}`)
+                .json(user);
         } 
         catch (error) {
             res.status(400).json({ message: "Erreur lors de l'authentification de l'utilisateur", error: error.message });
