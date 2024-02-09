@@ -1,8 +1,7 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 import { RouterLink } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
-import router from '@/router';
 
 const formData = reactive({
     email: '',

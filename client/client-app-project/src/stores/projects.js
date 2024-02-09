@@ -9,7 +9,7 @@ export const useProjectsStore = defineStore('projects', () => {
   async function fetchProjects(userId) {
 
     try {
-      const response = await axios.get(`/user/${userId}/projects`);
+      const response = await axios.get(`/user/${userId}/projects`, { withCredentials: true });
       projects.value = response.data;
 
     } catch (error) {
@@ -19,7 +19,11 @@ export const useProjectsStore = defineStore('projects', () => {
 
   async function createProject(project) {
     try {
-      const response = await axios.post('http://localhost:3000/create-project', project);
+      const response = await axios.post(
+        'http://localhost:3000/create-project',
+        project,
+        { withCredentials: true }
+      );
       projects.value.push(response.data);
     } catch (error) {
       console.error(error);

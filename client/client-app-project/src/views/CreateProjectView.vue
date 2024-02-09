@@ -1,10 +1,10 @@
-<script>
+<script setup>
 import { useProjectsStore } from '@/stores/projects';
 import { reactive } from 'vue';
 
 const formData = reactive({
-  title: '',
-  description: ''
+  denomination: '',
+  details: ''
 });
 
 const { createProject } = useProjectsStore();

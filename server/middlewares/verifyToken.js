@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 function verifyToken(req, res, next) {
-    const authHeader = req.headers.authorization;
-
-    const token = authHeader.split(' ')[1];
-    if(!token) {
-        return res.status(401).json({ message: "Aucun token" });
+    const cookie = req.cookies;
+    const token = cookie.accessToken;
+    if (!token) {
+        return res.status(401).json({ message: "Vous devez être connecté pour accéder à cette page" });
     }
 
     try {

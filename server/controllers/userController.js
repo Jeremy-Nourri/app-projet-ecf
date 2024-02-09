@@ -33,18 +33,17 @@ const userController = {
                 return res.status(401).json({ message: "Email ou/et mot de passe invalide(s)" });
             }
 
-            const token = jwt.sign({ userdId: user.id }, process.env.RANDOM_TOKEN_SECRET, { expiresIn: "1d" });
+            const token = jwt.sign({ userId: user.id }, process.env.RANDOM_TOKEN_SECRET, { expiresIn: "1d" });
 
+            console.log(token);
             res.cookie("accessToken", token, {
                 httpOnly: true,                
-                secure: true,
-                sameSite: "none",
+                // secure: true,
+                sameSite: true,
                 expires: expiryDate
             });
         
-            res
-                .header('Authorization', `Bearer ${token}`)
-                .json(user);
+            res.json(user);
         } 
         catch (error) {
             res.status(400).json({ message: "Erreur lors de l'authentification de l'utilisateur", error: error.message });

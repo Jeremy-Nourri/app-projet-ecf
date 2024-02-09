@@ -4,7 +4,7 @@ import { useProjectsStore } from '@/stores/projects';
 import { onMounted } from 'vue';
 
 const { user } = useAuthStore();
-const { fetchProjects, projects } = useProjectsStore();
+const { fetchProjects } = useProjectsStore();
 
 onMounted(() => {
   fetchProjects(user.id)

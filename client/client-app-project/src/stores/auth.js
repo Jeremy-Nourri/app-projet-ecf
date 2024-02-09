@@ -13,7 +13,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login({ email, password }) {
     try {
-      const response = await axios.post('http://localhost:3000/login', { email, password });
+      const response = await axios.post(
+        'http://localhost:3000/login',
+        { email, password },
+        { withCredentials: true }
+      );
       user.value = response.data;
       if (response.status === 200) {  
       router.push('/account');
