@@ -24,6 +24,7 @@ export const useProjectsStore = defineStore('projects', () => {
         project,
         { withCredentials: true }
       );
+      console.log(response.data);
       projects.value.push(response.data);
     } catch (error) {
       console.error(error);

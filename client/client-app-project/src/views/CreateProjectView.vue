@@ -1,13 +1,16 @@
 <script setup>
 import { useProjectsStore } from '@/stores/projects';
+import { useAuthStore } from '@/stores/auth';
 import { reactive } from 'vue';
+
+const { createProject } = useProjectsStore();
+const { user } = useAuthStore();
 
 const formData = reactive({
   denomination: '',
-  details: ''
+  details: '',
+  utilisateur_id: user.id
 });
-
-const { createProject } = useProjectsStore();
 
 const submitProject = async () => {
   await createProject(formData);
