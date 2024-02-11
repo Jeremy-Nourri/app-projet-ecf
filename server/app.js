@@ -8,12 +8,10 @@ const indexRoutes = require('./routes/indexRoutes');
 
 const app = express();
 
-const PORT = 3000;
-
 app.use(express.json());
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.CLIENT_URL,
   credentials: true,
 }));
 
@@ -21,7 +19,7 @@ app.use(cookieParser());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use(indexRoutes);
+app.use('/api/v1', indexRoutes);
 
 app.get('*', (req, res) => {
   res.status(404).json({ error: 'Page non trouvée' });
@@ -34,6 +32,6 @@ sequelize
     console.log("Erreur lors de la connexion à la base de données", err.message);
 });
 
-app.listen(PORT, () => {
-  console.log(`Serveur en écoute sur le port ${PORT}`);
+app.listen(process.env.PORT_SERVER, () => {
+  console.log(`Serveur lancé sur le port ${process.env.PORT}`);
 });
