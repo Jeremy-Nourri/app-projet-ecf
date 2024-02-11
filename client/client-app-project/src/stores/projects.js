@@ -1,15 +1,16 @@
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import { defineStore } from 'pinia';
 import api from '@/services/api';
 
 export const useProjectsStore = defineStore('projects', () => {
   
-  const projects = ref([]);
-
+  const projects = reactive([]);
+  
   async function fetchProjects(userId) {
     try {
       const response = await api.get(`/user/${userId}/projects`);
-      projects.value = response.data;
+      projects.length = 0;
+      response.data.forEach(project => projects.push(project));
 
     } catch (error) {
       console.error(error);
@@ -21,7 +22,7 @@ export const useProjectsStore = defineStore('projects', () => {
       const response = await api.post('/create-project', project);
       console.log(project);
       console.log(response.data);
-      projects.value.push(response.data);
+      projects.push(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -30,7 +31,10 @@ export const useProjectsStore = defineStore('projects', () => {
   async function deleteProject(userId, projectId) {
     try {
       await api.delete(`/user/${userId}/project/${projectId}/update`);
-      projects.value = projects.value.filter(project => project.id !== projectId);
+      const index = projects.findIndex(project => project.id === projectId);
+      if (index !== -1) {
+        projects.splice(index, 1);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -39,15 +43,14 @@ export const useProjectsStore = defineStore('projects', () => {
   async function updateProject(userId, projectId, project) {
     try {
       const response = await api.put(`/user/${userId}/project/${projectId}/update`, project);
-      const index = projects.value.findIndex(p => p.id === project.id);
-      projects.value[index] = response.data;
+      const index = projects.findIndex(p => p.id === projectId);
+      if (index !== -1) {
+        projects[index] = response.data;
+      }
     } catch (error) {
       console.error(error);
     }
   }
-
-
-  
 
   return { fetchProjects, createProject, deleteProject, updateProject, projects };
 })
