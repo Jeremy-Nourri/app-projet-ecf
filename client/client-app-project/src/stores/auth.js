@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue';
 import router from '../router';
 import { defineStore } from 'pinia';
-import axios from 'axios';
+import api from '@/services/api';
 
 export const useAuthStore = defineStore('auth', () => {
 
@@ -13,15 +13,13 @@ export const useAuthStore = defineStore('auth', () => {
 
   async function login({ email, password }) {
     try {
-      const response = await axios.post(
-        'http://localhost:3000/login',
-        { email, password },
-        { withCredentials: true }
-      );
+      const response = await api.post(`/login`, { email, password });
       user.value = response.data;
       if (response.status === 200) {  
-      router.push('/account');
+        router.push('/account');
       }
+      console.log(user.value);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }

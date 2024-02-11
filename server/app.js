@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-  origin: process.env.CLIENT_URL,
+  origin: "http://localhost:5173",
   credentials: true,
 }));
 
@@ -33,5 +33,5 @@ sequelize
 });
 
 app.listen(process.env.PORT_SERVER, () => {
-  console.log(`Serveur lancé sur le port ${process.env.PORT}`);
+  console.log(`Serveur lancé sur le port ${process.env.PORT_SERVER}`);
 });
